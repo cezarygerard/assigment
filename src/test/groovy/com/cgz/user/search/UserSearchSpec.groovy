@@ -4,7 +4,7 @@ import com.cgz.dto.UserDto
 import com.cgz.dto.UserNotFoundException
 import spock.lang.Specification
 
-class UserSearchTest extends Specification {
+class UserSearchSpec extends Specification {
 
     UserStoreClient mockUserStore = Mock(UserStoreClient)
     UserFacade userFacade = new UserSearchConfiguration().userFacade(mockUserStore)
@@ -12,8 +12,8 @@ class UserSearchTest extends Specification {
     def "Finds single user by Id"() {
         given:
             long existingUserId = 1
-            long existingUserName = 'anyName'
-            mockUserStore.allUsers() >> Collections.singletonList(
+            String existingUserName = 'anyName'
+            mockUserStore.getAllUsers() >> Collections.singletonList(
                         new User(existingUserId, existingUserName)
                     )
         when:
@@ -26,7 +26,7 @@ class UserSearchTest extends Specification {
 
     def "throws UserNotFoundExeption when user does not exist"() {
         given:
-            mockUserStore.allUsers() >> Collections.EMPTY_LIST
+            mockUserStore.getAllUsers() >> Collections.EMPTY_LIST
             long nonExistingUserId = -1
 
         when:
