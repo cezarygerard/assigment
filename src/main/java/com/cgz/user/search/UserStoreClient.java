@@ -6,8 +6,7 @@ import java.util.List;
 class UserStoreClient {
 
     //TODO Hystrix command
-    //TODO cache with expiration
-
+    //TODO implement cache depending on business requirements
     List<User> getAllUsers(){
         return  Arrays.asList(new User(1, "a"), new User(2, "b"));
     }

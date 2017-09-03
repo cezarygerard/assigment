@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.springframework.data.domain.Sort;
 
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.Stack;
 
 class UserComparator implements Comparator<User> {
@@ -15,14 +16,17 @@ class UserComparator implements Comparator<User> {
     static final String USER_NAME_FIELD = "name";
 
     public UserComparator(Sort sortingProperties) {
-        this.reversedSortingProperties = new Stack<>();
-        sortingProperties.iterator().
-                forEachRemaining(reversedSortingProperties::push);
+
+        reversedSortingProperties = new Stack<Sort.Order>();
+        Optional.ofNullable(sortingProperties)
+                .map(Sort::iterator)
+                .ifPresent(iterator ->
+                        iterator.forEachRemaining(reversedSortingProperties::push)
+                );
     }
 
     @Override
     public int compare(User user1, User user2) {
-
         CompareToBuilder compareToBuilder = new CompareToBuilder();
         reversedSortingProperties.stream().sequential().forEach(
                 order -> appendCompareToBuilder(compareToBuilder, order, user1, user2)

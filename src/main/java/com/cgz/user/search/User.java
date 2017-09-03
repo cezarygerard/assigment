@@ -1,13 +1,11 @@
 package com.cgz.user.search;
 
 import com.cgz.dto.UserDto;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
+@ToString
 class User {
 
     long id;
