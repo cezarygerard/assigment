@@ -14,7 +14,9 @@ import java.util.stream.Stream;
 
 class PageableFactory {
 
-    private static final String  SEPARATOR = ",";
+    static final String SORT_SEPARATOR = ".";
+
+    private static final String SEPARATOR_REGEX = "\\"+SORT_SEPARATOR;
 
     private static final String  ASC_DIRECTION_PARAMETER = "ASC";
 
@@ -49,12 +51,12 @@ class PageableFactory {
 
     private boolean isParamValid(String singleSortParameter) {
         return SORTABLE_FIELDS.contains(
-                singleSortParameter.split(SEPARATOR)[0]
+                singleSortParameter.split(SEPARATOR_REGEX)[0]
         );
     }
 
     private Sort.Order createOrder(String singleSortParameter) {
-        String[] paramAndDirection = singleSortParameter.split(SEPARATOR);
+        String[] paramAndDirection = singleSortParameter.split(SEPARATOR_REGEX);
         Sort.Direction direction = parseDirection(paramAndDirection);
         return new Sort.Order(direction, paramAndDirection[0]);
     }

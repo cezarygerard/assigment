@@ -4,6 +4,8 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import spock.lang.Specification
 
+import static PageableFactory.SORT_SEPARATOR
+
 class PageableFactorySpec extends Specification {
 
     PageableFactory pageableCreator = new PageableFactory()
@@ -40,8 +42,8 @@ class PageableFactorySpec extends Specification {
 
     def "creates pageable.sort with multiple properties and sort directions"() {
         given:
-            String idSortAndDirection  = "$idSortProperty,DESC"
-            String nameSortAndDirection  = "$nameSortProperty,asc"
+            String idSortAndDirection  = "$idSortProperty${SORT_SEPARATOR}DESC"
+            String nameSortAndDirection  = "$nameSortProperty${SORT_SEPARATOR}asc"
             List<String> sortingParams = [nameSortAndDirection,idSortAndDirection]
         when:
             Pageable pageable = pageableCreator.from(ANY_PAGE_NUMBER, ANY_PAGE_SIZE, sortingParams)

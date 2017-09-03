@@ -17,7 +17,7 @@ class UserSearchSpec extends Specification {
 
     int ANY_PAGE_SIZE = 5
 
-    long ANY_PAGE_NUMBER = 3
+    int ANY_PAGE_NUMBER = 3
 
     List<String> NO_SORTING = null
 
@@ -75,7 +75,7 @@ class UserSearchSpec extends Specification {
                 users.add(new User(ANY_ID, it))
             }
             mockUserStore.getAllUsers() >> users
-            List<String> sortParam = ['name,desc', 'id,asc']
+            List<String> sortParam = ['name.desc', 'id.asc']
         when:
             Page<UserDto> pagedResult = userFacade.findAll(ANY_PAGE_NUMBER, ANY_PAGE_SIZE, sortParam)
         then:
