@@ -5,6 +5,8 @@ import com.cgz.dto.UserNotFoundException
 import org.springframework.data.domain.Page
 import spock.lang.Specification
 
+import static com.cgz.user.search.PageableFactory.SORT_SEPARATOR
+
 class UserSearchSpec extends Specification {
 
     UserStoreClient mockUserStore = Mock(UserStoreClient)
@@ -75,7 +77,7 @@ class UserSearchSpec extends Specification {
                 users.add(new User(ANY_ID, it))
             }
             mockUserStore.getAllUsers() >> users
-            List<String> sortParam = ['name.desc', 'id.asc']
+            List<String> sortParam = ["name${SORT_SEPARATOR}desc".toString(), "id${SORT_SEPARATOR}asc".toString()]
         when:
             Page<UserDto> pagedResult = userFacade.findAll(ANY_PAGE_NUMBER, ANY_PAGE_SIZE, sortParam)
         then:
