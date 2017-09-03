@@ -1,13 +1,30 @@
 package com.cgz.user.search;
 
+import com.cgz.user.search.FetchAllUsersCommand.UserServiceResponse;
+import lombok.AllArgsConstructor;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@AllArgsConstructor
 class UserStoreClient {
 
-    //TODO Hystrix command
-    //TODO implement cache depending on business requirements
+    private final RestTemplate restTemplate;
+
+    private final String clientStoreEndpoint;
+
     List<User> getAllUsers(){
-        return  Arrays.asList(new User(1, "a"), new User(2, "b"));
+        List<UserServiceResponse> commandResponse =
+                new FetchAllUsersCommand(clientStoreEndpoint, restTemplate).execute();
+
+        return mapToDomainUserObject(commandResponse);
+    }
+
+    private List<User> mapToDomainUserObject(List<UserServiceResponse> commandResponse) {
+        return commandResponse.stream()
+                .map(response -> new User(response.id, response.name))
+                .collect(Collectors.toList());
     }
 }
