@@ -1,3 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: "groovy"
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+
 buildscript {
     ext {
         springBootVersion = '1.5.6.RELEASE'
@@ -9,13 +18,6 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
