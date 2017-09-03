@@ -38,7 +38,6 @@ class UserRepository {
                 .map(User::dto)
                 .findAny()
                 .orElseThrow(() -> new UserNotFoundException(id));
-                //TODO 404 error handler
     }
 
 }

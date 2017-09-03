@@ -4,7 +4,6 @@ import com.cgz.user.search.FetchAllUsersCommand.UserServiceResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +14,7 @@ class UserStoreClient {
 
     private final String clientStoreEndpoint;
 
+    //TODO implement @Cacheable is possible
     List<User> getAllUsers(){
         List<UserServiceResponse> commandResponse =
                 new FetchAllUsersCommand(clientStoreEndpoint, restTemplate).execute();
