@@ -6,7 +6,11 @@ import com.cgz.dto.UserNotFoundException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 class UserRepository {
@@ -14,7 +18,17 @@ class UserRepository {
     private UserStoreClient userStoreClient;
 
     Page<UserDto> findAll(Pageable pageable) {
-        return null;
+
+        List<User> allUsers = userStoreClient.getAllUsers();
+
+        List<UserDto> sortedUsers = allUsers.stream()
+                .skip(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .sorted(new UserComparator(pageable.getSort()))
+                .map(User::dto)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(sortedUsers, pageable,  allUsers.size());
     }
 
     UserDto findOne(long id) {
