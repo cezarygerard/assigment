@@ -1,0 +1,17 @@
+package com.cgz.user.search;
+
+import com.cgz.dto.UserDto;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+class User {
+
+    long id;
+
+    String name;
+
+    UserDto dto(){
+        return new UserDto(id,name);
+    }
+}
