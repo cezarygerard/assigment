@@ -33,7 +33,8 @@ ext {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-aop')
-    compile('org.springframework.boot:spring-boot-starter-cache')
+    //TODO implement cache depending on business requirements
+//    compile('org.springframework.boot:spring-boot-starter-cache')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.cloud:spring-cloud-starter-hystrix')
     compile('org.springframework.data:spring-data-commons')

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 class UserRepository {
 
-    private UserStoreClient userStoreClient;
+    private final UserStoreClient userStoreClient;
 
     Page<UserDto> findAll(Pageable pageable) {
 
