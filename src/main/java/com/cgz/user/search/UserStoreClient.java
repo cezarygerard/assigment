@@ -14,7 +14,7 @@ class UserStoreClient {
 
     private final String clientStoreEndpoint;
 
-    //TODO implement @Cacheable is possible
+    //TODO implement @Cacheable if possible
     List<User> getAllUsers(){
         List<UserServiceResponse> commandResponse =
                 new FetchAllUsersCommand(clientStoreEndpoint, restTemplate).execute();
