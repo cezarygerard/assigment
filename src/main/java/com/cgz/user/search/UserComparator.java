@@ -17,7 +17,7 @@ class UserComparator implements Comparator<User> {
 
     public UserComparator(Sort sortingProperties) {
 
-        reversedSortingProperties = new Stack<Sort.Order>();
+        reversedSortingProperties = new Stack<>();
         Optional.ofNullable(sortingProperties)
                 .map(Sort::iterator)
                 .ifPresent(iterator ->

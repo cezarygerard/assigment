@@ -3,7 +3,7 @@ package com.cgz.user.search
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 
-class FetchAllUsersCommandTest extends Specification {
+class FetchAllUsersCommandSpec extends Specification {
 
     def "returns empty collection on exception"() {
         given:
